@@ -118,8 +118,9 @@ public class PlayerBody : MonoBehaviour
         if (movementLock == false)
         {
             Vector3 newPosition = rb.position + (rb.transform.forward * moveSpeed * playerController.VerticalMag * Time.deltaTime) + (rb.transform.right * moveSpeed * playerController.HorizontalMag * Time.deltaTime);
+            Debug.Log(newPosition.magnitude);
 
-            animator.SetFloat("Speed", (newPosition.magnitude));
+            animator.SetFloat("Speed", Mathf.Abs(playerController.VerticalMag));
 
             rb.MovePosition(newPosition);
         }
