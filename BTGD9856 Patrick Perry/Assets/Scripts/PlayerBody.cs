@@ -15,6 +15,8 @@ public class PlayerBody : MonoBehaviour
     //Movement
     [SerializeField]
     private float moveSpeed = 5f;
+    [SerializeField]
+    private float backwardsMoveSpeed = 2.5f;
 
     [SerializeField]
     private float lookSpeed = 1000f;
@@ -107,9 +109,9 @@ public class PlayerBody : MonoBehaviour
             }
         }
 
-        if (playerController.Jump)
+        if (playerController.Dance)
         {
-            jump();
+            dance();
         }
     }
      
@@ -117,12 +119,25 @@ public class PlayerBody : MonoBehaviour
     {
         if (movementLock == false)
         {
-            Vector3 newPosition = rb.position + (rb.transform.forward * moveSpeed * playerController.VerticalMag * Time.deltaTime) + (rb.transform.right * moveSpeed * playerController.HorizontalMag * Time.deltaTime);
-            Debug.Log(newPosition.magnitude);
 
-            animator.SetFloat("SpeedForward", Mathf.Abs(playerController.VerticalMag));
-            animator.SetFloat("SpeedSideways", Mathf.Abs(playerController.HorizontalMag));
-            rb.MovePosition(newPosition);
+            Vector2 direction = new Vector2(playerController.HorizontalMag, playerController.VerticalMag);
+
+            direction = direction.normalized;
+
+            if (playerController.VerticalMag < 0)
+            {
+                Vector3 newPosition = rb.position + (rb.transform.forward * backwardsMoveSpeed * direction.y * Time.deltaTime) + (rb.transform.right * backwardsMoveSpeed * direction.x * Time.deltaTime);
+                rb.MovePosition(newPosition);
+            }
+
+            else
+            {
+                Vector3 newPosition = rb.position + (rb.transform.forward * moveSpeed * direction.y * Time.deltaTime) + (rb.transform.right * moveSpeed * direction.x * Time.deltaTime);
+                rb.MovePosition(newPosition);
+            }
+
+            animator.SetFloat("SpeedForward", playerController.VerticalMag);
+            animator.SetFloat("SpeedSideways", playerController.HorizontalMag);
         }
     }
 
@@ -138,7 +153,6 @@ public class PlayerBody : MonoBehaviour
 
     public void teleportToObject()
     {
-        Debug.Log("TELEPORTTOOBJECT RAN");
         gameObject.transform.position = GameObject.Find("TeleportObject(Old)(Clone)").transform.position;
         Destroy(GameObject.Find("TeleportObject(Old)(Clone)"));
     }
@@ -149,9 +163,9 @@ public class PlayerBody : MonoBehaviour
         shootOnCD = true;
     }
 
-    private void jump()
+    private void dance()
     {
-        rb.AddForce(Vector3.up * jumpForce);
+        animator.SetTrigger("Dance");
     }
 
     private void OnTriggerEnter(Collider other)
