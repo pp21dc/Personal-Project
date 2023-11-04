@@ -18,21 +18,15 @@ public class ThrowTeleportObject : MonoBehaviour
 
     private bool hitWall = false;
     Quaternion playerRotation;
-    private void Awake()
+   /* private void Awake()
     {
-        playerRotation = GameObject.Find("PlayerBody").transform.rotation;
+        //playerRotation = GameObject.Find("PlayerBody").transform.rotation;
 
         //transform.rotation = playerRotation;
-    }
+    }*/
     void Update()
     {
-        timer += Time.deltaTime;
-        
-        if (timer <= maxTime && hitWall == false)
-        {
-            transform.position += transform.forward * Time.deltaTime * projectileSpeed;
-        }
-
+        transform.position += transform.forward * Time.deltaTime * projectileSpeed;
     }
 
     private void OnTriggerEnter(Collider other)

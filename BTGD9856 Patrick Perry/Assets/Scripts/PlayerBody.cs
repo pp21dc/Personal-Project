@@ -94,7 +94,7 @@ public class PlayerBody : MonoBehaviour
 
         if(playerController.PrimaryFire && shootOnCD == false)
         {
-            fire();
+            animator.SetTrigger("CastFireBall");
         }
 
         if(shootOnCD == true)
@@ -120,18 +120,30 @@ public class PlayerBody : MonoBehaviour
             Vector3 newPosition = rb.position + (rb.transform.forward * moveSpeed * playerController.VerticalMag * Time.deltaTime) + (rb.transform.right * moveSpeed * playerController.HorizontalMag * Time.deltaTime);
             Debug.Log(newPosition.magnitude);
 
-            animator.SetFloat("Speed", Mathf.Abs(playerController.VerticalMag));
-
+            animator.SetFloat("SpeedForward", Mathf.Abs(playerController.VerticalMag));
+            animator.SetFloat("SpeedSideways", Mathf.Abs(playerController.HorizontalMag));
             rb.MovePosition(newPosition);
         }
     }
 
     private void dash()
     {
-        rb.AddForce((rb.transform.forward * dashSpeed * yMagOnDash * dashSpeed * Time.deltaTime) + (rb.transform.right * dashSpeed * xMagOnDash * dashSpeed * Time.deltaTime));
+        animator.SetTrigger("CastTeleport");
     }
 
-    private void fire()
+    public void instanceTeleportObject()
+    {
+        Instantiate(teleportObject, teleportObjectSpawnPoint.transform.position, gameObject.transform.rotation);
+    }
+
+    public void teleportToObject()
+    {
+        Debug.Log("TELEPORTTOOBJECT RAN");
+        gameObject.transform.position = GameObject.Find("TeleportObject(Old)(Clone)").transform.position;
+        Destroy(GameObject.Find("TeleportObject(Old)(Clone)"));
+    }
+
+    public void fire()
     {
         Instantiate(primaryBullet, teleportObjectSpawnPoint.transform.position, gameObject.transform.rotation);
         shootOnCD = true;

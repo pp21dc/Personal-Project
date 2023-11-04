@@ -13,7 +13,7 @@ public class CameraFollowPlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerBody = GameObject.Find("PlayerBody");
+        playerBody = GameObject.Find("RedPanda");
         oldPos = playerBody.transform.position;
     }
 
