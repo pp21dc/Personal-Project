@@ -153,8 +153,9 @@ public class PlayerBody : MonoBehaviour
 
     public void teleportToObject()
     {
-        gameObject.transform.position = GameObject.Find("TeleportObject(Old)(Clone)").transform.position;
-        Destroy(GameObject.Find("TeleportObject(Old)(Clone)"));
+        gameObject.transform.position = GameObject.Find("TeleportObject(Clone)").transform.position;
+        Destroy(GameObject.Find("TeleportObject(Clone)"));
+        unlockMovement();
     }
 
     public void fire()
@@ -170,13 +171,25 @@ public class PlayerBody : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "TeleportObject")
+/*        if(other.gameObject.tag == "TeleportObject")
         {
             hasDashed = true;
             movementLock = false;
             Destroy(GameObject.Find("TeleportObject(Clone)"));
             gameObject.tag = "Player";
 
-        }
+        }*/
+    }
+
+    public void lockMovement()
+    {
+        movementLock = true;
+        Debug.Log("Locked Movment");
+    }
+
+    public void unlockMovement()
+    {
+        movementLock = false;
+        Debug.Log("Unlocked Movment");
     }
 }

@@ -48,7 +48,6 @@ public class PlayerController : MonoBehaviour
         verticalMag = Input.GetAxis("Vertical");
         horizontalMag = Input.GetAxis("Horizontal");
         rightStickHorizontalMag = Input.GetAxis("RightStickHorizontal");
-        Debug.Log(rightStickHorizontalMag);
     }
 
     private void checkAttack()
