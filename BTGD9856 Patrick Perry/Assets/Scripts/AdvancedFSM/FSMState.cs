@@ -22,9 +22,10 @@ public abstract class FSMState
     protected FSMStateID stateID;
     public FSMStateID ID { get { return stateID; } }
     protected Vector3 destPos;
-    protected Transform[] waypoints;
+    protected Transform playerLocation;
     protected float curRotSpeed;
     protected float curSpeed;
+    protected Transform[] enemyLocations;
 
     public void AddTransition(Transition transition, FSMStateID id)
     {
@@ -118,11 +119,11 @@ public abstract class FSMState
     /// </summary>
     public virtual void FindNextPoint()
     {
-        int randomIndex = Random.Range(0, waypoints.Length);
-        destPos = waypoints[randomIndex].position;
+        /*int randomIndex = Random.Range(0, waypoints.Length);
+        destPos = waypoints[randomIndex].position;*/
     }
 
-    public Transform GetFurthestWayPoint(Transform trans)
+/*    public Transform GetFurthestWayPoint(Transform trans)
     {
         return GetWayPoint(trans, true);
     }
@@ -130,16 +131,16 @@ public abstract class FSMState
     public Transform GetClosestWaypoint(Transform trans)
     {
         return GetWayPoint(trans);
-    }
+    }*/
 
-    private Transform GetWayPoint(Transform trans, bool furthest = false)
+/*    private Transform GetWayPoint(Transform trans, bool furthest = false)
     {
         if (waypoints == null || waypoints.Length == 0)
         {
             return null;
-        }
+        }*/
 
-        float currSqrMagnitude = (trans.position - waypoints[0].position).sqrMagnitude;
+/*        float currSqrMagnitude = (trans.position - waypoints[0].position).sqrMagnitude;
         Transform retValue = waypoints[0];
 
         for (int i = 1; i < waypoints.Length; i++)
@@ -154,7 +155,7 @@ public abstract class FSMState
         }
 
         return retValue;
-    }
+    }*/
 
     /// <summary>
     /// Check whether the next random position is the same as current position

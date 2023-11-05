@@ -13,7 +13,7 @@ using System.Collections.Generic;
 public enum Transition
 {
     None = 0,
-    NoHealth
+    enemyNear
 }
 
 public enum FSMStateID
@@ -22,7 +22,7 @@ public enum FSMStateID
     FOLLOW,
     CIRCLE,
     ATTACK,
-    REST
+    IDLE
 }
 
 public class AdvancedFSM : FSM
