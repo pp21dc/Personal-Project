@@ -11,13 +11,13 @@ public class ThrowTeleportObject : MonoBehaviour
     [SerializeField]
     private float projectileSpeed = 5f;
 
-    private float timer = 0f;
+    /*private float timer = 0f;*/
 
-    [SerializeField]
-    private float maxTime = 5f;
+    /*[SerializeField]
+    private float maxTime = 5f;*/
 
     private bool hitWall = false;
-    Quaternion playerRotation;
+    /*Quaternion playerRotation;*/
    /* private void Awake()
     {
         //playerRotation = GameObject.Find("PlayerBody").transform.rotation;
@@ -26,7 +26,11 @@ public class ThrowTeleportObject : MonoBehaviour
     }*/
     void Update()
     {
-        transform.position += transform.forward * Time.deltaTime * projectileSpeed;
+        if(hitWall == false)
+        {
+            transform.position += transform.forward * Time.deltaTime * projectileSpeed;
+        }
+        
     }
 
     private void OnTriggerEnter(Collider other)

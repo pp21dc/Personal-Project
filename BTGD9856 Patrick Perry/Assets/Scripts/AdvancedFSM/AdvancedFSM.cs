@@ -13,16 +13,23 @@ using System.Collections.Generic;
 public enum Transition
 {
     None = 0,
-    enemyNear
+    EnemyNear,
+    NoEnemyNear,
+    playerTooFar,
+    reachedPlayer,
+    playerLowHealth,
+    playerHealthAcceptable,
+
 }
 
 public enum FSMStateID
 {
     None = 0,
-    FOLLOW,
-    CIRCLE,
-    ATTACK,
-    IDLE
+    Attack,
+    Circle,
+    Follow,
+    Heal
+    
 }
 
 public class AdvancedFSM : FSM

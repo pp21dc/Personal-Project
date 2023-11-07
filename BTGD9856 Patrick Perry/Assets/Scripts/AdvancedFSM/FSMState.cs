@@ -25,8 +25,10 @@ public abstract class FSMState
     protected Transform playerLocation;
     protected float curRotSpeed;
     protected float curSpeed;
-    protected Transform[] enemyLocations;
-
+    protected List<GameObject> enemies1;
+    protected GameObject projectile;
+    protected float range;
+    protected bool ran = false;
     public void AddTransition(Transition transition, FSMStateID id)
     {
         // Check if anyone of the args is invallid
@@ -123,53 +125,47 @@ public abstract class FSMState
         destPos = waypoints[randomIndex].position;*/
     }
 
-/*    public Transform GetFurthestWayPoint(Transform trans)
+    public virtual GameObject FindClosestPosition(Transform player, List<GameObject> enemies)
     {
-        return GetWayPoint(trans, true);
-    }
 
-    public Transform GetClosestWaypoint(Transform trans)
-    {
-        return GetWayPoint(trans);
-    }*/
-
-/*    private Transform GetWayPoint(Transform trans, bool furthest = false)
-    {
-        if (waypoints == null || waypoints.Length == 0)
+        GameObject closestEnemy = enemies[0];
+        
+        float currentLowestDistance = 500f;
+        foreach(GameObject enemy in enemies)
         {
-            return null;
-        }*/
-
-/*        float currSqrMagnitude = (trans.position - waypoints[0].position).sqrMagnitude;
-        Transform retValue = waypoints[0];
-
-        for (int i = 1; i < waypoints.Length; i++)
-        {
-            float sqrMagnitude = (trans.position - waypoints[i].position).sqrMagnitude;
-
-            if ((furthest && (sqrMagnitude > currSqrMagnitude)) || (!furthest && (sqrMagnitude < currSqrMagnitude)))
+            if(enemy == null)
             {
-               retValue = waypoints[i];
-               currSqrMagnitude = sqrMagnitude;
+                enemies.Remove(enemy);
+            }
+            if(Vector3.Distance(playerLocation.position, enemy.transform.position) < currentLowestDistance)
+            {
+                closestEnemy = enemy;
+                currentLowestDistance = Vector3.Distance(playerLocation.position, enemy.transform.position);
             }
         }
-
-        return retValue;
-    }*/
-
-    /// <summary>
-    /// Check whether the next random position is the same as current position
-    /// </summary>
-    /// <param name="pos">position to check</param>
-    protected virtual bool IsInCurrentRange(Transform trans, Vector3 pos, float range)
-    {
-        bool inRange = false;
-        float dist = Vector3.Distance(trans.position, pos);
-        if (dist <= range)
-        {
-            inRange = true;
-        }
-        return inRange;
+        return closestEnemy;
     }
 
+    public virtual List<GameObject> UpdateList(List<GameObject> inputList)
+    {
+        foreach (GameObject enemy in inputList)
+        {
+            if (enemy == null)
+            {
+                inputList.Remove(enemy);
+                return inputList;
+            }
+        }
+            return inputList;
+    }
+
+    public virtual float GetPlayerHealth(GameObject player)
+    {
+        return player.GetComponent<PlayerBody>().playerHealth;
+    }
+
+    public virtual void HealPlayer(GameObject player, float healAmount)
+    {
+        player.GetComponent<PlayerBody>().playerHealth += healAmount;
+    }
 }

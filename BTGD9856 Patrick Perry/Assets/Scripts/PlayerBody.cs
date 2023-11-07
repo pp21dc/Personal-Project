@@ -32,7 +32,7 @@ public class PlayerBody : MonoBehaviour
     [SerializeField]
     GameObject teleportObject;
     GameObject teleportObjectSpawnPoint;
-    private float dashSpeed = 30f;
+    //private float dashSpeed = 30f;
     private float xMagOnDash;
     private float yMagOnDash;
 
@@ -45,12 +45,13 @@ public class PlayerBody : MonoBehaviour
     private float shootCDTimer = 0f;
     
     //Jump
-    [SerializeField]
-    private float jumpForce = 10f;
+/*    [SerializeField]
+    private float jumpForce = 10f;*/
 
     [SerializeField]
     private Animator animator;
 
+    public float playerHealth = 100f;
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -160,6 +161,7 @@ public class PlayerBody : MonoBehaviour
 
     public void fire()
     {
+        playerHealth -= 20;
         Instantiate(primaryBullet, teleportObjectSpawnPoint.transform.position, gameObject.transform.rotation);
         shootOnCD = true;
     }
@@ -191,5 +193,15 @@ public class PlayerBody : MonoBehaviour
     {
         movementLock = false;
         Debug.Log("Unlocked Movment");
+    }
+    
+    public void setTagDancing()
+    {
+        gameObject.tag = "Dancing";
+    }
+
+    public void setTagPlayer()
+    {
+        gameObject.tag = "Player";
     }
 }

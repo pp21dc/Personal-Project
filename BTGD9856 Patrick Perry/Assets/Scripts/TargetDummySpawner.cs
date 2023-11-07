@@ -16,6 +16,7 @@ public class TargetDummySpawner : MonoBehaviour
     GameObject sp2;
     GameObject sp3;
 
+    public List<GameObject> enemies = new List<GameObject>();
     // Start is called before the first frame update
     void Start()
     {
@@ -27,7 +28,7 @@ public class TargetDummySpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(GameObject.Find("TargetDummy1(Clone)") == false)
+        /*if(GameObject.Find("TargetDummy1(Clone)") == false)
         {
             Instantiate(targetDummy1, sp1.transform.position, sp1.transform.rotation);
         }
@@ -40,7 +41,8 @@ public class TargetDummySpawner : MonoBehaviour
         if (GameObject.Find("TargetDummy3(Clone)") == false)
         {
             Instantiate(targetDummy3, sp3.transform.position, sp3.transform.rotation);
-        }
+        }*/
+    
     }
 
 

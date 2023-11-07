@@ -14,6 +14,8 @@ public class TargetDummy : MonoBehaviour
     [SerializeField]
     private float dissolveSpeed = 1f;
 
+    [SerializeField]
+    public float health = 100f;
     private void Start()
     {
         material = gameObject.GetComponent<Renderer>().material;
@@ -21,9 +23,22 @@ public class TargetDummy : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag.Equals("Bullet") || other.tag.Equals("CanHurt"))
+        if (other.tag.Equals("Bullet"))
         {
-            StartCoroutine("deathEffect");
+            health -= 100f;
+            if (health <= 0)
+            {
+                StartCoroutine("deathEffect");
+            }
+        }
+
+        if (other.tag.Equals("AIBullet"))
+        {
+            health -= 7;
+            if (health <= 0)
+            {
+                StartCoroutine("deathEffect");
+            }
         }
     }
 

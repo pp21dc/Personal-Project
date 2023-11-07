@@ -9,6 +9,8 @@ TagManager:
   - Bullet
   - Enemy
   - CanHurt
+  - AIBullet
+  - Dancing
   layers:
   - Default
   - TransparentFX
