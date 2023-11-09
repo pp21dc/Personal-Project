@@ -1,4 +1,4 @@
-using System.Collections;
+/*using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviour
     private bool isLoading = false;
     private int currentLevel = 0;
     private string currentLevelName;
+
     void Start()
     {
         StartCoroutine("LoadLevel", levelNames[0]);
@@ -56,3 +57,4 @@ public class GameManager : MonoBehaviour
         isLoading = false;
     }
 }
+*/
