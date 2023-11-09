@@ -30,6 +30,6 @@ public class FollowState : FSMState
 
     public override void Act(Transform player, Transform npc)
     {
-            companion.transform.position = Vector3.MoveTowards(companion.transform.position, new Vector3(playerLocation.transform.position.x, companion.transform.position.y, playerLocation.transform.position.z), movespeed * Time.deltaTime);
+            companion.GetComponent<Rigidbody>().transform.position = Vector3.MoveTowards(companion.transform.position, new Vector3(playerLocation.transform.position.x, companion.transform.position.y, playerLocation.transform.position.z), movespeed * Time.deltaTime);
     }
 }

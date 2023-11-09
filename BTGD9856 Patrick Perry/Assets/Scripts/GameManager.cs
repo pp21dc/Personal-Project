@@ -1,4 +1,4 @@
-/*using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
 
     public static GameManager Instance
     {
-        get 
+        get
         {
             if (instance == null)
             {
@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
             {
                 Debug.Log("No game manager Present!!!");
             }
-            return instance; 
+            return instance;
         }
     }
 
@@ -32,10 +32,12 @@ public class GameManager : MonoBehaviour
     private bool isLoading = false;
     private int currentLevel = 0;
     private string currentLevelName;
+    
+    private int list
 
     void Start()
     {
-        StartCoroutine("LoadLevel", levelNames[0]);
+        /*StartCoroutine("LoadLevel", levelNames[0]);*/
     }
 
     private IEnumerator LoadLevel(string levelName)
@@ -57,4 +59,3 @@ public class GameManager : MonoBehaviour
         isLoading = false;
     }
 }
-*/
