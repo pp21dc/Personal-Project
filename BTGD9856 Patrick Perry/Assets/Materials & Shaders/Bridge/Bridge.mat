@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: HealthBar
-  m_Shader: {fileID: -6465566751694194690, guid: b41fe6d2cc23aa74d98c65a4689e49a6,
+  m_Name: Bridge
+  m_Shader: {fileID: -6465566751694194690, guid: ef8157fb69dc3854aae40b13af7735ea,
     type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -99,7 +99,6 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _Health: 0.8
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
@@ -115,12 +114,17 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 0.31857443, g: 1, b: 0, a: 1}
-    - _Color: {r: 0.3185744, g: 1, b: 0, a: 1}
+    - _Accent: {r: 1, g: 1, b: 1, a: 0}
+    - _AccentScrollSpeed: {r: 0, g: 0.33, b: 0, a: 0}
+    - _AccentTiling: {r: 9, g: 0.52, b: 0, a: 0}
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 0, g: 1, b: 0.9898968, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _Scroll_Speed: {r: 0, g: 0.5, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
+    - _Tiling: {r: 6.52, g: 0.54, b: 0, a: 0}
   m_BuildTextureStacks: []
---- !u!114 &5304963692202790615
+--- !u!114 &4941323570548134062
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}

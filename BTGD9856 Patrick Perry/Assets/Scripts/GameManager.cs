@@ -1,4 +1,4 @@
-using System.Collections;
+/*using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -37,7 +37,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        /*StartCoroutine("LoadLevel", levelNames[0]);*/
+        *//*StartCoroutine("LoadLevel", levelNames[0]);*//*
     }
 
     private IEnumerator LoadLevel(string levelName)
@@ -59,3 +59,4 @@ public class GameManager : MonoBehaviour
         isLoading = false;
     }
 }
+*/
