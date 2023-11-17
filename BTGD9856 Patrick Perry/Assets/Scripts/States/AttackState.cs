@@ -29,7 +29,7 @@ public class AttackState : FSMState
             return;
         }
 
-        else if (Vector3.Distance(FindClosestPosition(npc, enemies1).transform.position, npc.position) > attackAIProperties.range)
+        else if (FindClosestPosition() == null)
         {
             companion.PerformTransition(Transition.NoEnemyNear);
             return;
@@ -45,11 +45,9 @@ public class AttackState : FSMState
 
     public override void Act(Transform player, Transform npc)
     {
-        attackAIProperties.closestEnemyText.text = "Nearest Enemy: " + Vector3.Distance(FindClosestPosition(npc, enemies1).transform.position, npc.position).ToString("#.00");
-        enemies1 = UpdateList(enemies1);
-        if (Vector3.Distance(FindClosestPosition(npc, enemies1).transform.position, npc.position) < attackAIProperties.range) 
+        if (FindClosestPosition().GetComponent<TargetDummy>().health >= 0) 
         { 
-            npc.LookAt(FindClosestPosition(npc, enemies1).transform);
+            npc.LookAt(FindClosestPosition().transform);
             Debug.DrawRay(companion.transform.position, companion.transform.forward, Color.red);
             if (timer == 0)
         {

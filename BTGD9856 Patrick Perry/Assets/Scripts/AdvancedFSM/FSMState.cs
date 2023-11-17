@@ -47,7 +47,7 @@ public abstract class FSMState
         }
 
         map.Add(transition, id);
-        Debug.Log("Added : " + transition + " with ID : " + id);
+        //Debug.Log("Added : " + transition + " with ID : " + id);
     }
 
     /// <summary>
@@ -125,10 +125,10 @@ public abstract class FSMState
         destPos = waypoints[randomIndex].position;*/
     }
 
-    public virtual GameObject FindClosestPosition(Transform player, List<GameObject> enemies)
+    public virtual GameObject FindClosestPosition()
     {
 
-        GameObject closestEnemy = enemies[0];
+        /*GameObject closestEnemy = enemies[0];
         
         float currentLowestDistance = 500f;
         foreach(GameObject enemy in enemies)
@@ -143,7 +143,9 @@ public abstract class FSMState
                 currentLowestDistance = Vector3.Distance(playerLocation.position, enemy.transform.position);
             }
         }
-        return closestEnemy;
+        return closestEnemy;*/
+
+        return GameObject.Find("EnemyDetection").GetComponent<EnemyManager>().getClosestEnemy();
     }
 
     public virtual List<GameObject> UpdateList(List<GameObject> inputList)

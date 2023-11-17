@@ -16,6 +16,9 @@ public class TargetDummy : MonoBehaviour
 
     [SerializeField]
     public float health = 100f;
+
+    [SerializeField]
+    private EnemyManager enemyManager;
     private void Start()
     {
         material = gameObject.GetComponent<Renderer>().material;
@@ -29,6 +32,7 @@ public class TargetDummy : MonoBehaviour
             if (health <= 0)
             {
                 StartCoroutine("deathEffect");
+                enemyManager.removeOnDeath(gameObject);
             }
         }
 
@@ -38,6 +42,7 @@ public class TargetDummy : MonoBehaviour
             if (health <= 0)
             {
                 StartCoroutine("deathEffect");
+                enemyManager.removeOnDeath(gameObject);
             }
         }
     }

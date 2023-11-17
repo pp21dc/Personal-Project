@@ -8,7 +8,7 @@ public class FollowState : FSMState
     private AIController companion;
     bool moving;
     float movespeed;
-
+    private Vector3 newPosition;
 
     public FollowState(AIController controller, FollowAIProperties followAIProperties, Transform trans)
     {
@@ -30,6 +30,7 @@ public class FollowState : FSMState
 
     public override void Act(Transform player, Transform npc)
     {
-            companion.GetComponent<Rigidbody>().transform.position = Vector3.MoveTowards(companion.transform.position, new Vector3(playerLocation.transform.position.x, companion.transform.position.y, playerLocation.transform.position.z), movespeed * Time.deltaTime);
+        newPosition = Vector3.MoveTowards(companion.transform.position, new Vector3(playerLocation.transform.position.x, companion.transform.position.y, playerLocation.transform.position.z), movespeed * Time.deltaTime);
+        companion.GetComponent<Rigidbody>().MovePosition(newPosition);
     }
 }
