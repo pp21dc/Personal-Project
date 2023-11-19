@@ -29,6 +29,8 @@ public class PlayerController : MonoBehaviour
     private bool dance = false;
     public bool Dance { get { return dance; } }
 
+    private bool cameraRotate = false;
+    public bool CameraRotate { get { return cameraRotate; } }
     // Update is called once per frame
     void Update()
     {
@@ -55,6 +57,7 @@ public class PlayerController : MonoBehaviour
         primaryFire = Input.GetButtonDown("Fire1");
         altFire = Input.GetButtonDown("Fire3");
         dance = Input.GetButtonDown("Dance");
+        cameraRotate = Input.GetButton("Fire2");
 
     }
 }

@@ -52,6 +52,14 @@ public class PlayerBody : MonoBehaviour
     private Animator animator;
 
     public float playerHealth = 100f;
+
+    Vector3 mousePosition;
+    Vector3 oldMousePosition = new Vector3(0, 0, 0);
+
+    [SerializeField]
+    GameObject camera;
+
+    public float lookSens = 0.5f;
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -114,6 +122,13 @@ public class PlayerBody : MonoBehaviour
         {
             dance();
         }
+        mousePosition = Input.mousePosition;
+        Debug.Log(getDifference(mousePosition, oldMousePosition));
+        if (playerController.CameraRotate)
+        {
+            camera.transform.RotateAround(gameObject.transform.position, Vector3.up, lookSens *getDifference(mousePosition, oldMousePosition)*360*Time.deltaTime);
+        }
+        oldMousePosition = mousePosition;
     }
      
     private void FixedUpdate()
@@ -203,5 +218,10 @@ public class PlayerBody : MonoBehaviour
     public void setTagPlayer()
     {
         gameObject.tag = "Player";
+    }
+
+    private float getDifference(Vector3 a, Vector3 b)
+    {
+        return a.x - b.x;
     }
 }
