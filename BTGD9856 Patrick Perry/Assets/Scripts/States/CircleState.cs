@@ -27,8 +27,7 @@ public class CircleState : FSMState
             return;
         }
 
-        //Debug.Log("Distance: " + Vector3.Distance(FindClosestPosition(npc, enemies1).transform.position, companion.transform.position));
-        if (GameObject.FindWithTag("Enemy"))
+        if (FindClosestPosition() != null)
         {
             companion.PerformTransition(Transition.EnemyNear);
             return;
