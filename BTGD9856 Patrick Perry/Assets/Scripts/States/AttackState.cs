@@ -38,6 +38,7 @@ public class AttackState : FSMState
         if (GetPlayerHealth(attackAIProperties.playerLocation) < 30f)
         {
             companion.PerformTransition(Transition.playerLowHealth);
+            attackAIProperties.healFX.Play();
             return;
         }
     }

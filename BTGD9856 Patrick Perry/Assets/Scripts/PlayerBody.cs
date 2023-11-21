@@ -70,25 +70,9 @@ public class PlayerBody : MonoBehaviour
 
     private void Update()
     {
-        if (usingController == false) {
-            if (movementLock == false)
-            {
-                mousePositionAdjusted = new Vector3(playerController.MousePosition.x, rb.position.y, playerController.MousePosition.z);
-                rb.transform.LookAt(mousePositionAdjusted);
-            }
-        }
-
-        if (movementLock == false)
-        {
-            gameObject.transform.Rotate(0f, lookSpeed * playerController.RightStickHorizontalMag * Time.deltaTime, 0f);
-        }
-
         if (playerController.AltFire && dashOnCD == false)
         {
-            xMagOnDash = playerController.HorizontalMag;
-            yMagOnDash = playerController.VerticalMag;
             dash();
-
         }
 
         if (dashOnCD == true) 
@@ -103,6 +87,7 @@ public class PlayerBody : MonoBehaviour
             }
         }
 
+        //Shoot fireball if not on cooldown - if on CD run timer
         if(playerController.PrimaryFire && shootOnCD == false)
         {
             animator.SetTrigger("CastFireBall");
@@ -118,15 +103,17 @@ public class PlayerBody : MonoBehaviour
             }
         }
 
+        //if dance is pressed dance
         if (playerController.Dance)
         {
             dance();
         }
-        mousePosition = Input.mousePosition;
-        Debug.Log(getDifference(mousePosition, oldMousePosition));
+        
+        //Rotate Camera Around player when right click is pressed
         if (playerController.CameraRotate)
         {
             camera.transform.RotateAround(gameObject.transform.position, Vector3.up, lookSens *getDifference(mousePosition, oldMousePosition)*360*Time.deltaTime);
+            gameObject.transform.Rotate(0f, lookSens * getDifference(mousePosition, oldMousePosition) * 360 * Time.deltaTime, 0f);
         }
         oldMousePosition = mousePosition;
     }
@@ -142,13 +129,13 @@ public class PlayerBody : MonoBehaviour
 
             if (playerController.VerticalMag < 0)
             {
-                Vector3 newPosition = rb.position + (rb.transform.forward * backwardsMoveSpeed * direction.y * Time.deltaTime) + (rb.transform.right * backwardsMoveSpeed * direction.x * Time.deltaTime);
+                Vector3 newPosition = rb.position + (camera.transform.forward * backwardsMoveSpeed * direction.y * Time.deltaTime) + (camera.transform.right * backwardsMoveSpeed * direction.x * Time.deltaTime);
                 rb.MovePosition(newPosition);
             }
 
             else
             {
-                Vector3 newPosition = rb.position + (rb.transform.forward * moveSpeed * direction.y * Time.deltaTime) + (rb.transform.right * moveSpeed * direction.x * Time.deltaTime);
+                Vector3 newPosition = rb.position + (camera.transform.forward * moveSpeed * direction.y * Time.deltaTime) + (camera.transform.right * moveSpeed * direction.x * Time.deltaTime);
                 rb.MovePosition(newPosition);
             }
 
@@ -177,25 +164,16 @@ public class PlayerBody : MonoBehaviour
     public void fire()
     {
         playerHealth -= 20;
-        Instantiate(primaryBullet, teleportObjectSpawnPoint.transform.position, gameObject.transform.rotation);
+        GameObject playerFireball = ObjectPool.Instance.GetPooledObject();
+        playerFireball.transform.position = teleportObjectSpawnPoint.transform.position;
+        playerFireball.transform.rotation = teleportObjectSpawnPoint.transform.rotation;
+        playerFireball.SetActive(true);
         shootOnCD = true;
     }
 
     private void dance()
     {
         animator.SetTrigger("Dance");
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-/*        if(other.gameObject.tag == "TeleportObject")
-        {
-            hasDashed = true;
-            movementLock = false;
-            Destroy(GameObject.Find("TeleportObject(Clone)"));
-            gameObject.tag = "Player";
-
-        }*/
     }
 
     public void lockMovement()
@@ -209,17 +187,6 @@ public class PlayerBody : MonoBehaviour
         movementLock = false;
         Debug.Log("Unlocked Movment");
     }
-    
-    public void setTagDancing()
-    {
-        gameObject.tag = "Dancing";
-    }
-
-    public void setTagPlayer()
-    {
-        gameObject.tag = "Player";
-    }
-
     private float getDifference(Vector3 a, Vector3 b)
     {
         return a.x - b.x;

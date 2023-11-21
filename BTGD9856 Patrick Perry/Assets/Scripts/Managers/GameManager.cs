@@ -1,11 +1,12 @@
-/*using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-
+    [SerializeField]
+    GameObject player;
     private static GameManager instance;
 
     public static GameManager Instance
@@ -32,12 +33,20 @@ public class GameManager : MonoBehaviour
     private bool isLoading = false;
     private int currentLevel = 0;
     private string currentLevelName;
-    
-    private int list
 
+    private int list;
+    
+    private void Awake()
+    {
+        if(instance == null)
+        {
+            instance = this;
+        }
+  
+    }
     void Start()
     {
-        *//*StartCoroutine("LoadLevel", levelNames[0]);*//*
+        StartCoroutine("LoadLevel", levelNames[0]);
     }
 
     private IEnumerator LoadLevel(string levelName)
@@ -53,10 +62,39 @@ public class GameManager : MonoBehaviour
         {
             yield return null;
         }
+        SceneManager.SetActiveScene(SceneManager.GetSceneByName(levelName));
         currentLevelName = levelName;
 
         //initialize player etc
         isLoading = false;
+
+        player.transform.position = GameObject.Find("PlayerSpawn").transform.position;
+    }
+
+    private IEnumerator UnloadLevel(string levelName)
+    {
+        isLoading = true;
+
+        //uload current level scene
+
+
+        //load next level scene
+        AsyncOperation asyncLoad = SceneManager.UnloadSceneAsync(levelName);
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
+
+        //initialize player etc
+        isLoading = false;
+    }
+    public void LevelComplete()
+    {
+        StartCoroutine(UnloadLevel(levelNames[currentLevel]));
+        currentLevel++;
+        if(currentLevel < levelNames.Length)
+        {
+            StartCoroutine(LoadLevel(levelNames[currentLevel]));
+        }
     }
 }
-*/

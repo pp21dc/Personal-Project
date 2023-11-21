@@ -24,6 +24,7 @@ public class CircleState : FSMState
         if (GetPlayerHealth(circleAIProperties.playerLocation) < 100f)
         {
             companion.PerformTransition(Transition.playerLowHealth);
+            circleAIProperties.healFX.Play();
             return;
         }
 

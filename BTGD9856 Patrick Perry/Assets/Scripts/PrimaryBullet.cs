@@ -17,12 +17,12 @@ public class PrimaryBullet : MonoBehaviour
     {
         if (other.tag.Equals("Wall"))
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
 
         if (other.tag.Equals("Enemy"))
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 }

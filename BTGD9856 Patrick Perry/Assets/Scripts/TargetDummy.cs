@@ -19,6 +19,11 @@ public class TargetDummy : MonoBehaviour
 
     [SerializeField]
     private EnemyManager enemyManager;
+
+    private void Awake()
+    {
+        enemyManager = GameObject.Find("EnemyDetection").GetComponent<EnemyManager>();
+    }
     private void Start()
     {
         material = gameObject.GetComponent<Renderer>().material;
@@ -52,7 +57,7 @@ public class TargetDummy : MonoBehaviour
 
     float dissolveValue = 1;
     float dissolveMin = -7;
-
+        gameObject.GetComponent<ParticleSystem>().Play();
         gameObject.GetComponent<CapsuleCollider>().enabled = false;
         while (dissolveValue >= dissolveMin)
         {

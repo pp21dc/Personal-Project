@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public abstract class AIProperties
 {
     public GameObject playerLocation;
+    public ParticleSystem healFX;
 }
 
 [System.Serializable]
