@@ -108,10 +108,11 @@ public class PlayerBody : MonoBehaviour
         {
             dance();
         }
-        
+        mousePosition = Input.mousePosition;
         //Rotate Camera Around player when right click is pressed
         if (playerController.CameraRotate)
         {
+            Debug.Log("______________________");
             camera.transform.RotateAround(gameObject.transform.position, Vector3.up, lookSens *getDifference(mousePosition, oldMousePosition)*360*Time.deltaTime);
             gameObject.transform.Rotate(0f, lookSens * getDifference(mousePosition, oldMousePosition) * 360 * Time.deltaTime, 0f);
         }

@@ -99,7 +99,7 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _Health: 0.20526703
+    - _Health: 1.0008707
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005

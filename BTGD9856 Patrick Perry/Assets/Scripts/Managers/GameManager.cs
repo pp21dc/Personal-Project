@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
+        SceneManager.UnloadSceneAsync("MainMenu");
         StartCoroutine("LoadLevel", levelNames[0]);
     }
 

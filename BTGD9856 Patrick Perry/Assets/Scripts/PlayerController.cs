@@ -31,6 +31,9 @@ public class PlayerController : MonoBehaviour
 
     private bool cameraRotate = false;
     public bool CameraRotate { get { return cameraRotate; } }
+
+    private bool paused = false;
+    public bool Paused { get { return paused; } }
     // Update is called once per frame
     void Update()
     {
@@ -58,6 +61,7 @@ public class PlayerController : MonoBehaviour
         altFire = Input.GetButtonDown("Fire3");
         dance = Input.GetButtonDown("Dance");
         cameraRotate = Input.GetButton("Fire2");
+        paused = Input.GetButtonDown("Pause");
 
     }
 }

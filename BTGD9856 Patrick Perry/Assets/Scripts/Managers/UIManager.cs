@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -9,6 +10,9 @@ public class UIManager : MonoBehaviour
 
     [SerializeField]
     GameObject pauseMenu;
+
+    [SerializeField]
+    PlayerController playerController;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,10 +22,13 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (playerController.Paused)
+        {
+            EnablePauseMenu();
+        }
     }
 
-    private void EnablePauseMenu()
+    public void EnablePauseMenu()
     {
         if (!pauseMenu.activeSelf)
         {
@@ -34,5 +41,10 @@ public class UIManager : MonoBehaviour
             pauseMenu.SetActive(false);
             Time.timeScale = 1;
         }
+    }
+
+    public void StartNewGame()
+    {
+        SceneManager.LoadSceneAsync("Persistant Scene", LoadSceneMode.Additive);
     }
 }
